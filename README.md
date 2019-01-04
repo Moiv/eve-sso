@@ -10,7 +10,7 @@ Edit the Configuration.php file and fill in the below:
 ```php
 define('CLIENT_ID', 'client_id'); <-- Add your unique Client ID here
 define('SECRET_KEY', 'secret_key'); <-- Add your unique Secret Key
-define('CALLBACK_URL', 'http://pi/thefarkencorp/eve-sso/callback.php');  <-- Change this callback to the relevant location
+define('CALLBACK_URL', 'http://pi/thecorp/eve-sso/callback.php');  <-- Change this callback to the relevant location
 define('UNIQUE_STATE', 'thecorp'); <-- Change this to any custom unique string. Can be left as is
 ```
 ## Usage
