@@ -17,13 +17,18 @@ class KeyChain
 	// Tokens
 	private $auth_token = null;
 	private $refresh_token = null;
+	
+	// Token Storer
+	private $storer = null;
 
 	/**
+	 * Constructor
 	 * 
-	 * @param TokenStorer $storer
+	 * @param iTokenStorer $storer Object implementing the iTokenStorer interface
 	 */
-	public function __construct(TokenStorer $storer)
+	public function __construct(iTokenStorer $storer)
 	{
+		$this->storer = $storer;
 		$this->loadKeys();
 	}
 
@@ -51,7 +56,8 @@ class KeyChain
 	 */
 	public function GetAuthToken()
 	{
-		return $this->auth_token;
+		return $this->storer->LoadAuthToken();
+		//return $this->auth_token;
 	}
 
 	/**
@@ -60,10 +66,33 @@ class KeyChain
 	 */
 	public function GetRefreshToken()
 	{
-		return $this->refresh_token;
+		return $this->storer->LoadRefreshToken();
+		//return $this->refresh_token;
 	}
 
-
+	/**
+ 	* Save an auth or refresh token 
+ 	* 
+ 	* @param mixed $token Auth or Refresh Token
+ 	*/
+	public function SaveToken($token)
+	{
+		if (!is_object($token)) return false;
+		
+		switch (get_class($token)) {
+			case 'eve\sso\AuthToken':
+				$this->storer->StoreAuthToken($token);
+				break;
+			case 'eve\sso\RefreshToken':
+				$this->storer->StoreRefreshToken($token);
+				break;
+			default:
+				var_dump(get_class($token));
+		}
+		
+	}
+	
+	
 	/**
 	 * Internal function to load the keys from storage location
 	 */
@@ -74,6 +103,7 @@ class KeyChain
 
 		// Load Secret Key
 		$this->Secret_Key = SECRET_KEY;
+		
 	}
 }
 

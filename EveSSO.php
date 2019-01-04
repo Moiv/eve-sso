@@ -28,17 +28,17 @@ class EveSSO
 		if ($options == null) $options = array();
 
 		//Use TokenStorer if supplied otherwise create a default one
-		if (array_key_exists('tokenstorer', $options)) {
-			$this->tokenstorer = $options['tokenstorer'];
-		} else {
-			$this->tokenstorer = new TokenStorer();
-		}
+// 		if (array_key_exists('tokenstorer', $options)) {
+// 			$this->tokenstorer = $options['tokenstorer'];
+// 		} else {
+// 			$this->tokenstorer = new FSTokenStorer();
+// 		}
 
 		//Use KeyChain if supplied otherwise create a default one
 		if (array_key_exists('keychain', $options)) {
 			$this->keychain = $options['keychain'];
 		} else {
-			$this->keychain = new KeyChain($this->tokenstorer);
+			$this->keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH));
 		}
 
 		//Use RequestGenerator if supplied otherwise create a default one
@@ -89,12 +89,25 @@ class EveSSO
 	/**
 	 * Output HTML Code to show the LOG IN with EVE Online button
 	 * @param string $url URL for button to direct to
+	 * @param int $size [optional] Size of buttom image
 	 */
-	public function HTMLLoginButton($url)
+	public function HTMLLoginButton($url, $size=1)
 	{
-		echo " <A HREF = '$url'><img src = 'https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-black-large.png'></a>";
-		// https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-black-large.png
-		// https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-white-large.png
+		switch ($size) {
+			case 2:
+				$img = 'eve-sso-login-white-large.png';
+				break;
+			case 3:
+				$img = 'eve-sso-login-black-small.png';
+				break;
+			case 4:
+				$img = 'eve-sso-login-white-small.png';
+				break;
+			default:
+				$img = 'eve-sso-login-black-large.png';
+				break;
+		}
+		echo " <A HREF = '$url'><img src = 'https://web.ccpgamescdn.com/eveonlineassets/developers/$img'></a>";
 	}
 
 }

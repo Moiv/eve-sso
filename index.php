@@ -13,6 +13,7 @@ $eveSSO->Init();
 $status = $eveSSO->GetInitResponse();
 
 if (is_string($status)) $eveSSO->HTMLLoginButton($status);
-if (is_a($status, KeyChain)) $KeyChain = $status;
+
+if (is_a($status, 'KeyChain')) $KeyChain = $status;
 
 ?>
