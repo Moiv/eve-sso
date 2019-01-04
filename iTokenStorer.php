@@ -2,8 +2,9 @@
 namespace eve\sso;
 
 /**
- *
- * @author Mike
+ * Interface for TokenStorer classes
+ * 
+ * @author Moiv
  *        
  */
 interface iTokenStorer

@@ -3,7 +3,7 @@ namespace eve\sso;
 
 /**
  *
- * @author Mike
+ * @author Moiv
  *        
  */
 class TokenStorer implements iTokenStorer

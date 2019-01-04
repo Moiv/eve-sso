@@ -3,17 +3,17 @@ namespace eve\sso;
 
 /**
  *
- * @author Mike
+ * @author Moiv
  *        
  */
 class RefreshToken extends Token
 {
 
-    /**
-     */
-    public function __construct($token)
-    {
-        parent::__construct($token);
-    }
+	/**
+	 */
+	public function __construct($token)
+	{
+		parent::__construct($token);
+	}
 }
 

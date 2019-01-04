@@ -3,7 +3,7 @@ namespace eve\sso;
 
 define('CLIENT_ID', 'client_id');
 define('SECRET_KEY', 'secret_key');
-define('CALLBACK_URL', 'http://pi/thecorp/eve-sso/callback.php');
+define('CALLBACK_URL', 'http://pi/thefarkencorp/eve-sso/callback.php');
 define('UNIQUE_STATE', 'thecorp');
 
 //define('ESI_SCOPE', 'esi-corporations.read_corporation_membership.v1 esi-corporations.read_blueprints.v1');
