@@ -1,5 +1,6 @@
 # eve-sso
-Basic authentication system for Eve Online's SSO Implementation.
+Basic authentication system for Eve Online's SSO Implementation.<br>
+For documentation of Eve Onlines's SSO implementation refer here (https://docs.esi.evetech.net/docs/sso/)
 
 ## Installation
 It is recommended to place these files in a sub directory of your main php project
