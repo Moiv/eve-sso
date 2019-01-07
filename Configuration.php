@@ -1,10 +1,10 @@
 <?php
 namespace eve\sso;
 
-define('CLIENT_ID', 'client_id');
-define('SECRET_KEY', 'secret_key');
-define('CALLBACK_URL', 'http://pi/thefarkencorp/eve-sso/callback.php');
-define('UNIQUE_STATE', 'thecorp');
+define('CLIENT_ID', 'client_id');		// Change this to your Client ID
+define('SECRET_KEY', 'secret_key');		// Change this to your Secret Key
+define('CALLBACK_URL', 'http://pi/thecorp/eve-sso/callback.php');	// Change this to the location of your callback script
+define('UNIQUE_STATE', 'thecorp');		// Change this to a unique string
 
 define('FS_TOKEN_PATH', EVE_SSO_PATH.'tokens/'); // Filesystem Path for Token storage if using FSTokenStorer class
 
@@ -18,7 +18,9 @@ include_once EVE_SSO_PATH.'AuthToken.php';
 include_once EVE_SSO_PATH.'RefreshToken.php';
 include_once EVE_SSO_PATH.'iTokenStorer.php';
 include_once EVE_SSO_PATH.'FSTokenStorer.php';
+
 include_once EVE_SSO_PATH.'KeyChain.php';
+
 include_once EVE_SSO_PATH.'EveSSO.php';
 
 ?>

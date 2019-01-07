@@ -10,6 +10,8 @@ $generator->SetCallback(CALLBACK_URL);
 $generator->SetESIScope(ESI_SCOPE);
 $generator->SetState(UNIQUE_STATE);
 
+//Using default keychain with FSTokenStorer
+$keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH));
 
 if (!array_key_exists('code', $_GET)) die ('Do not call callback file manually');
 
@@ -34,6 +36,9 @@ $authToken = new AuthToken($contents->access_token);
 $refreshToken = new RefreshToken($contents->refresh_token);
 
 $authToken->SetExpiry(time() + $contents->expires_in);
+
+$keychain->SaveToken($authToken);
+$keychain->SaveToken($refreshToken);
 
 var_dump($authToken);
 var_dump($refreshToken)
