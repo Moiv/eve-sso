@@ -20,6 +20,11 @@ $state = $_GET['state'];
 
 if ($state != UNIQUE_STATE) die ('State received from sso server does not match that supplied by us');
 
+$requester = new TokenRequester($keychain);
+
+$requester->RequestToken($generator->GenerateTokenRequest($code));
+
+/*
 $ch = $generator->GenerateTokenRequest($code);
 
 $server_output = curl_exec($ch);
@@ -39,8 +44,9 @@ $authToken->SetExpiry(time() + $contents->expires_in);
 
 $keychain->SaveToken($authToken);
 $keychain->SaveToken($refreshToken);
+*/
 
-var_dump($authToken);
-var_dump($refreshToken)
+var_dump($keychain->GetAuthToken());
+var_dump($keychain->GetRefreshToken());
 
 ?>

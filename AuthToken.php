@@ -21,11 +21,11 @@ class AuthToken extends Token
 	/**
 	 * Check whether token is expired
 	 *
-	 * @return boolean True is expired
+	 * @return boolean True if expired
 	 */
 	public function IsExpired()
 	{
-		return false;
+		return ($this->expiry < time());
 	}
 
 	/**

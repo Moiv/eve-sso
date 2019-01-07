@@ -55,16 +55,18 @@ class FSTokenStorer implements iTokenStorer
 
 	/**
 	 * Retrieves Authorisation Token
-	 * @return AuthToken Authorisation Token
+	 * @return AuthToken Authorisation Token 
 	 */
 	public function LoadAuthToken()
 	{
 		$filename = $this->_storagePath.$this->_authTokenName;
 		
-		if (!is_readable($filename)) return false;
+		if (!is_readable($filename)) return null;
 		
 		$s = implode("", @file($filename));
 		$a = unserialize($s);
+		
+		if ($a == false) return null;
 		
 		return $a;
 	}
@@ -77,10 +79,12 @@ class FSTokenStorer implements iTokenStorer
 	{
 		$filename = $this->_storagePath.$this->_refreshTokenName;
 		
-		if (!is_readable($filename)) return false;
+		if (!is_readable($filename)) return null;
 		
 		$s = implode("", @file($filename));
 		$a = unserialize($s);
+		
+		if ($a == false) return null;
 		
 		return $a;
 	}

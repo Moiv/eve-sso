@@ -18,6 +18,7 @@ include_once EVE_SSO_PATH.'AuthToken.php';
 include_once EVE_SSO_PATH.'RefreshToken.php';
 include_once EVE_SSO_PATH.'iTokenStorer.php';
 include_once EVE_SSO_PATH.'FSTokenStorer.php';
+include_once EVE_SSO_PATH.'TokenRequester.php';
 
 include_once EVE_SSO_PATH.'KeyChain.php';
 

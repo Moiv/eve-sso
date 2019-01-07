@@ -56,8 +56,8 @@ class KeyChain
 	 */
 	public function GetAuthToken()
 	{
-		return $this->storer->LoadAuthToken();
-		//return $this->auth_token;
+		//return $this->storer->LoadAuthToken();
+		return $this->auth_token;
 	}
 
 	/**
@@ -66,8 +66,20 @@ class KeyChain
 	 */
 	public function GetRefreshToken()
 	{
-		return $this->storer->LoadRefreshToken();
-		//return $this->refresh_token;
+		//return $this->storer->LoadRefreshToken();
+		return $this->refresh_token;
+	}
+	
+	public function HasAuthToken()
+	{
+		if ($this->auth_token == null) return false;
+		return true;
+	}
+	
+	public function HasRefreshToken()
+	{
+		if ($this->refresh_token == null) return false;
+		return true;
 	}
 
 	/**
@@ -87,11 +99,21 @@ class KeyChain
 				$this->storer->StoreRefreshToken($token);
 				break;
 			default:
-				var_dump(get_class($token));
+				echo "ERROR: Unknown token was passed to KeyChain->SaveToken";
 		}
 		
+		$this->ReloadKeys();
 	}
 	
+	
+	/**
+	 * Re Load keys from the storage system
+	 */
+	public function ReloadKeys()
+	{
+		$this->auth_token = $this->storer->LoadAuthToken();
+		$this->refresh_token = $this->storer->LoadRefreshToken();
+	}
 	
 	/**
 	 * Internal function to load the keys from storage location
@@ -104,6 +126,7 @@ class KeyChain
 		// Load Secret Key
 		$this->Secret_Key = SECRET_KEY;
 		
+		$this->reloadKeys();
 	}
 }
 

@@ -8,12 +8,12 @@ include EVE_SSO_PATH.'Configuration.php';
 
 $eveSSO = new EveSSO();
 
-$eveSSO->Init();
+$status = $eveSSO->Init();
 
-$status = $eveSSO->GetInitResponse();
+//$status = $eveSSO->GetSSOStatus(); // No Longer Required, Init function will return this
 
-if (is_string($status)) $eveSSO->HTMLLoginButton($status);
+echo $status;
 
-if (is_a($status, 'KeyChain')) $KeyChain = $status;
+if ($status == 'code') $eveSSO->HTMLLoginButton($eveSSO->GetRequestCode());
 
 ?>

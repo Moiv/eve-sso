@@ -8,8 +8,8 @@ It is recommended to place these files in a sub directory of your main php proje
 ## Configuration
 Edit the Configuration.php file and fill in the below:
 ```php
-define('CLIENT_ID', 'client_id'); <-- Add your unique Client ID here
-define('SECRET_KEY', 'secret_key'); <-- Add your unique Secret Key
+define('CLIENT_ID', 'client_id'); <-- Change to your unique Client ID
+define('SECRET_KEY', 'secret_key'); <-- Change to your unique Secret Key
 define('CALLBACK_URL', 'http://pi/thecorp/eve-sso/callback.php');  <-- Change this callback to the relevant location
 define('UNIQUE_STATE', 'thecorp'); <-- Change this to any custom unique string. Can be left as is
 ```

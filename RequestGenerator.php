@@ -58,13 +58,15 @@ class RequestGenerator
 	}
 
 	/**
-	 * Generates a cURL Session to request Token
-	 *
-	 * @param string $auth_code
+	 * Generates a cURL Session to request an Auth Token
+	 * @param mixed $auth_code
+	 * <p>Provide a string containg a code for an initial auth token request<br>
+	 * or a RefreshToken object to request a refreshed auth token</p>
 	 * @return resource cURL Session
 	 */
 	public function GenerateTokenRequest($auth_code)
 	{
+		
 		$ch = curl_init();
 
 		$headers = array(
@@ -75,13 +77,22 @@ class RequestGenerator
 
 		curl_setopt($ch, CURLOPT_URL, $this->SSO_token_base_path);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=" . $auth_code);
+		
+		if (is_string($auth_code))
+		{
+			//echo "Generating an auth code request";
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=authorization_code&code=" . $auth_code); // Request Auth Token using Code
+		} elseif (is_a($auth_code, 'eve\sso\RefreshToken'))
+		{
+			//echo "Generating an auth token from refresh token request";
+			curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=refresh_token&refresh_token=" . $auth_code->GetValue()); // Request Auth Token using Refresh Token
+		} else {
+			// Invalid data passed in to function
+			return false;
+		}
+		
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded',
-		// "Authorization: Basic ".base64_encode($user.':'.$pass),
-		// "Host: login.eveonline.com"."\r\n"
-		// ));
 
 		// receive server response ...
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
