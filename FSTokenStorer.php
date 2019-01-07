@@ -36,7 +36,7 @@ class FSTokenStorer implements iTokenStorer
 	public function StoreAuthToken(AuthToken $token)
 	{
 		$s = serialize($token);
-		$fp = fopen($this->_storagePath.$this->_authTokenName, "w");
+		if (!$fp = fopen($this->_storagePath.$this->_authTokenName, "w")) return false;
 		fwrite($fp, $s);
 		fclose($fp);
 	}
@@ -48,7 +48,7 @@ class FSTokenStorer implements iTokenStorer
 	public function StoreRefreshToken(RefreshToken $token)
 	{
 		$s = serialize($token);
-		$fp = fopen($this->_storagePath.$this->_refreshTokenName, "w");
+		if (!$fp = fopen($this->_storagePath.$this->_refreshTokenName, "w")) return false;
 		fwrite($fp, $s);
 		fclose($fp);
 	}

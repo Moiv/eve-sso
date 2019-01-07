@@ -20,14 +20,14 @@ class EveSSO
 	 * @param array $options [Optional] An array containing options<br>
 	 * Valid Options:<br>
 	 * 'keychain'<br>
-	 * 'requestgenerator'<br>
-	 * 'tokenstorer'
+	 * 'requestgenerator'
 	 */
 	public function __construct(array $options = null)
 	{
 		if ($options == null) $options = array();
 
 		//Use TokenStorer if supplied otherwise create a default one
+		// Commented out. TokenStorer is be part of KeyChain object so this is redundant
 // 		if (array_key_exists('tokenstorer', $options)) {
 // 			$this->tokenstorer = $options['tokenstorer'];
 // 		} else {
@@ -55,7 +55,7 @@ class EveSSO
 
 	/**
 	 * Initialise SSO
-	 *@todo This should return either request URL or KeyChain object
+	 *@todo Finish this method. This should return either request URL string or a KeyChain object
 	 */
 	public function Init()
 	{
@@ -70,6 +70,8 @@ class EveSSO
 	
 	/**
 	 * Get the response from the Initialisation
+	 * @return mixed Will return a string containing an Authorise Request URL if authorisation required
+	 * or a KeyChain object if Authorisation is done and tokens are available
 	 */
 	public function GetInitResponse()
 	{
@@ -111,4 +113,4 @@ class EveSSO
 	}
 
 }
-
+?>
