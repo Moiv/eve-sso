@@ -14,8 +14,10 @@ define('CALLBACK_URL', 'http://pi/thecorp/eve-sso/callback.php');  <-- Change th
 define('UNIQUE_STATE', 'thecorp'); <-- Change this to any custom unique string. Can be left as is
 ```
 ## Usage
-Refer to index.php for a basic usage example, note that this is in the same directory as eve-sso.
+Refer to index.php for a basic usage example, note that index.php is in the same directory as eve-sso.
 If you have installed eve-sso into a sub directory you must define the EVE_SSO_PATH prior to using eve-sso.
+
+See below for an example of using it in an existing php project, with eve-sso in a sub directory
 ```php
 //
 // Existing php code
