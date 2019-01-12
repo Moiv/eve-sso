@@ -24,29 +24,8 @@ $requester = new TokenRequester($keychain);
 
 $requester->RequestToken($generator->GenerateTokenRequest($code));
 
-/*
-$ch = $generator->GenerateTokenRequest($code);
 
-$server_output = curl_exec($ch);
-curl_close($ch);
-
-$contents = json_decode($server_output);
-var_dump($contents);
-
-if (!is_object($contents)) die ('Invalid response from eve SSO server');
-if ($contents->error != null) die ('Error from eve SSO server: ' . $contents->error_description);
-if ($contents->access_token == null) die ('Error: No acces token received from eve SSO server');
-
-$authToken = new AuthToken($contents->access_token);
-$refreshToken = new RefreshToken($contents->refresh_token);
-
-$authToken->SetExpiry(time() + $contents->expires_in);
-
-$keychain->SaveToken($authToken);
-$keychain->SaveToken($refreshToken);
-*/
-
-var_dump($keychain->GetAuthToken());
-var_dump($keychain->GetRefreshToken());
+var_dump($keychain->GetAuthToken());	// For testing purposes
+var_dump($keychain->GetRefreshToken());	// For testing purposes
 
 ?>

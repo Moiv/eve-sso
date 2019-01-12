@@ -20,7 +20,7 @@ class TokenRequester
 	
 	
 	/**
-	 * Request auth token from SSO server & store locally
+	 * Request auth token from SSO server & store in the keychain
 	 * @param resource $ch cURL session with token request
 	 */
 	public function RequestToken($ch)
