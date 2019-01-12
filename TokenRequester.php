@@ -2,8 +2,9 @@
 namespace eve\sso;
 
 /**
- *
- * @author Mike
+ * This class requests the tokens from the eve-sso servers
+ * 
+ * @author Moiv
  *        
  */
 class TokenRequester
@@ -11,7 +12,8 @@ class TokenRequester
 
 	private $_keychain = null;
 	
-	/**
+	/** Constructor
+	 * @param KeyChain $keychain Requires a valid KeyChain object to function
 	 */
 	public function __construct(KeyChain $keychain)
 	{

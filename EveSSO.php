@@ -2,7 +2,8 @@
 namespace eve\sso;
 
 /**
- *
+ * Eve-sso main class and API
+ * 
  * @author Moiv
  *        
  */
@@ -55,8 +56,8 @@ class EveSSO
 	public function Init()
 	{
 		$status = $this->GetSSOStatus();
-		// Add code here to auto refresh
 		
+		// Automatically try to refresh once if required
 		if ($status == 'refresh')
 		{
 			$this->RefreshAuthToken();

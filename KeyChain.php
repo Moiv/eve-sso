@@ -2,10 +2,9 @@
 namespace eve\sso;
 
 /**
- * Key Chain to hold Client ID & Secret Key plus Auth & Refresh tokens - Currently Not Used
+ * Key Chain to hold Client ID & Secret Key plus Auth & Refresh tokens
  * 
  * @author Moiv
- * @todo Hold Auth & Refresh Tokens in KeyChain. Use keychain in remainder of application
  */
 class KeyChain
 {
