@@ -10,10 +10,6 @@ $eveSSO = new EveSSO();
 
 $status = $eveSSO->Init();
 
-//$status = $eveSSO->GetSSOStatus(); // No Longer Required, Init function will return this
-
-echo $status;
-
-if ($status == 'code') $eveSSO->HTMLLoginButton($eveSSO->GetRequestCode());
+if ($status == 'code') $eveSSO->HTMLLoginButton($eveSSO->GetRequestCode()); // You can change this to anyhing or remove completely
 
 ?>

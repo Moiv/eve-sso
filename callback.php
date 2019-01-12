@@ -24,8 +24,4 @@ $requester = new TokenRequester($keychain);
 
 $requester->RequestToken($generator->GenerateTokenRequest($code));
 
-
-var_dump($keychain->GetAuthToken());	// For testing purposes
-var_dump($keychain->GetRefreshToken());	// For testing purposes
-
 ?>

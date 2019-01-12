@@ -24,6 +24,7 @@ class EveSSO
 	public function __construct(array $options = null)
 	{
 		if ($options == null) $options = array();
+		
 		$this->data['hasValidAuthToken'] = false;
 
 		//Use KeyChain if supplied otherwise create a default one

@@ -42,7 +42,7 @@ class TokenRequester
 		$authToken = new AuthToken($contents->access_token);
 		$refreshToken = new RefreshToken($contents->refresh_token);
 		
-		$authToken->SetExpiry(time() + $contents->expires_in);
+		$authToken->SetExpiry(-1 + time() + $contents->expires_in);
 		
 		$this->_keychain->SaveToken($authToken);
 		$this->_keychain->SaveToken($refreshToken);
