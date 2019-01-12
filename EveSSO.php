@@ -50,8 +50,7 @@ class EveSSO
 	 * @return string Will return 1 of 3 responses:<br>
 	 * 'code' An Authorise Request URL will be required to get an auth token<br>
 	 * 'refresh' A new auth token will be required using the currently store refresh token<br>
-	 * 'auth' The current auth token is still valid and no action is required
-	 *@todo Finish this method. Need to implement a token refresher
+	 * 'authd' The current auth token is still valid and no action is required
 	 */
 	public function Init()
 	{

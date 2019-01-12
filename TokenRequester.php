@@ -27,14 +27,15 @@ class TokenRequester
 	{
 		
 		$server_output = curl_exec($ch);
-		$info = curl_getinfo($ch); 
+		//$info = curl_getinfo($ch);	// For testing purposes only
 		curl_close($ch);
 		
 		$contents = json_decode($server_output);
 		
-		var_dump($info);
-		var_dump($contents);
+		//var_dump($info);		// For testing purposes only
+		//var_dump($contents);	// For testing purposes only
 		
+		//@todo Handle errors more elegantly
 		if (!is_object($contents)) die ('Invalid response from eve SSO server');
 		if ($contents->error != null) die ('Error from eve SSO server: ' . $contents->error_description);
 		if ($contents->access_token == null) die ('Error: No access token received from eve SSO server');
