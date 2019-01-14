@@ -93,6 +93,17 @@ class EveSSO
 
 	
 	/**
+	 * Get the current auth token
+	 * @return string Auth token string
+	 */
+	public function GetAuthTokenString()
+	{
+		$token = $this->keychain->GetAuthToken();
+		return $token->GetValue();
+	}
+	
+	
+	/**
 	 * Get the auth token request URL
 	 * @return string Auth token request URL
 	 */
