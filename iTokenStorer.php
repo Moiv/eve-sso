@@ -5,7 +5,7 @@ namespace eve\sso;
  * Interface for TokenStorer classes
  * 
  * @author Moiv
- *        
+ * #todo Add method to change storage location with option to copy tokens 
  */
 interface iTokenStorer
 {
