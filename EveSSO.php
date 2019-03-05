@@ -98,8 +98,13 @@ class EveSSO
 	 */
 	public function GetAuthTokenString()
 	{
-		$token = $this->keychain->GetAuthToken();
-		return $token->GetValue();
+		if ($token = $this->keychain->GetAuthToken())
+		{
+			return $token->GetValue();
+		} else {
+			return null;
+		}
+
 	}
 	
 	

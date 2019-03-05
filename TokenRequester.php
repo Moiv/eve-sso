@@ -39,7 +39,7 @@ class TokenRequester
 		
 		//@todo Handle errors more elegantly
 		if (!is_object($contents)) die ('Invalid response from eve SSO server');
-		if ($contents->error != null) die ('Error from eve SSO server: ' . $contents->error_description);
+		if (property_exists($contents,"error") && $contents->error != null) die ('Error from eve SSO server: ' . $contents->error_description);
 		if ($contents->access_token == null) die ('Error: No access token received from eve SSO server');
 		
 		$authToken = new AuthToken($contents->access_token);
