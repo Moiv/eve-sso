@@ -25,14 +25,14 @@ class EveSSO
 	public function __construct(array $options = null)
 	{
 		if ($options == null) $options = array();
-		
+
 		$this->data['hasValidAuthToken'] = false;
 
 		//Use KeyChain if supplied otherwise create a default one
 		if (array_key_exists('keychain', $options)) {
 			if (is_a($options['keychain'], 'eve\sso\KeyChain')) $this->keychain = $options['keychain'];
 		} else {
-			$this->keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH));
+			$this->keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH), CLIENT_ID, SECRET_KEY);
 		}
 
 		//Use RequestGenerator if supplied otherwise create a default one

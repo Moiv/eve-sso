@@ -24,10 +24,15 @@ class KeyChain
 	 * Constructor
 	 * 
 	 * @param iTokenStorer $storer Object implementing the iTokenStorer interface
+	 * @param string $client_id Eve SSO Client ID
+	 * @param string $secret_key Eve SSO Secret Key 
 	 */
-	public function __construct(iTokenStorer $storer)
+	public function __construct(iTokenStorer $storer, $client_id, $secret_key)
 	{
 		$this->storer = $storer;
+		$this->ClientID = $client_id;
+		$this->Secret_Key = $secret_key;
+
 		$this->loadKeys();
 	}
 
@@ -119,12 +124,6 @@ class KeyChain
 	 */
 	private function loadKeys()
 	{
-		// Load Client ID
-		$this->ClientID = CLIENT_ID;
-
-		// Load Secret Key
-		$this->Secret_Key = SECRET_KEY;
-		
 		$this->reloadKeys();
 	}
 }
