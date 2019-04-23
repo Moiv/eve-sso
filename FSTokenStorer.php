@@ -22,7 +22,7 @@ class FSTokenStorer implements iTokenStorer
 	 */
 	public function __construct($path = "")
 	{
-		if ($path == "") $path = FS_TOKEN_PATH;
+		if ($path == "") throw new \Exception('Storage Path was empty');
 		$this->_storagePath = $path;
 		$path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
@@ -88,7 +88,7 @@ class FSTokenStorer implements iTokenStorer
 		
 		return $a;
 	}
-	
+
 	/**
 	 * Check that storage path is writable
 	 */
@@ -96,7 +96,7 @@ class FSTokenStorer implements iTokenStorer
 	{
 		
 	}
-	
+
 	/**
 	 * Checks if path exists and attempts to create it
 	 * @return bool Boolean if path exists
@@ -107,7 +107,7 @@ class FSTokenStorer implements iTokenStorer
 
 		return file_exists($this->_storagePath);
 	}
-	
+
 }
 
- ?>
+?>
