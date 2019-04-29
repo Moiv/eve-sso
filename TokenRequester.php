@@ -24,6 +24,7 @@ class TokenRequester
 	/**
 	 * Request auth token from SSO server & store in the keychain
 	 * @param resource $ch cURL session with token request
+	 * @return bool Returns true on success
 	 */
 	public function RequestToken($ch)
 	{
@@ -49,6 +50,8 @@ class TokenRequester
 		
 		$this->_keychain->SaveToken($authToken);
 		$this->_keychain->SaveToken($refreshToken);
+		
+		return true;
 	}
 }
 

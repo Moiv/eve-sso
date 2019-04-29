@@ -22,6 +22,8 @@ if ($state != UNIQUE_STATE) die ('State received from sso server does not match 
 
 $requester = new TokenRequester($keychain);
 
-$requester->RequestToken($generator->GenerateTokenRequest($code));
+$result = $requester->RequestToken($generator->GenerateTokenRequest($code)); //This returns true on success
+
+//Add output code here
 
 ?>
