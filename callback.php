@@ -11,7 +11,7 @@ $generator->SetESIScope(ESI_SCOPE);
 $generator->SetState(UNIQUE_STATE);
 
 //Using default keychain with FSTokenStorer
-$keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH));
+$keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH), CLIENT_ID, SECRET_KEY);
 
 if (!array_key_exists('code', $_GET)) die ('Do not call callback file manually');
 
