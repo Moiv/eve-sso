@@ -12,13 +12,15 @@ class FSTokenStorer implements iTokenStorer
 	private $_storagePath = '';
 	private $_authTokenName = 'auth.tkn';
 	private $_refreshTokenName = 'refresh.tkn';
+	private $_tokenSuffix = '';
 
 	/**
 	 * Constructor
 	 * 
 	 * @param string $path Path to directory where keys can be stored<br>
-	 * Make sure this is a secure location, particularly on a shared server
-	 * Refresh Tokens never expire so they must remain secure
+	 * Make sure this is a secure location, particularly on a shared server.<br>
+	 * Refresh Tokens never expire so they must remain secure.<br>
+	 * Constructor will throw an exception on empty path name or if path cannot be created.
 	 */
 	public function __construct($path = "")
 	{
@@ -26,7 +28,7 @@ class FSTokenStorer implements iTokenStorer
 		$this->_storagePath = $path;
 		$path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-		$this->CreatePath($this->_storagePath);
+		if (!$this->CreatePath($this->_storagePath)) throw new \Exception('Storage did not exist and could not be created');
 	}
 
 	/**
@@ -90,6 +92,20 @@ class FSTokenStorer implements iTokenStorer
 	}
 
 	/**
+	 * Sets a suffix to add to the token file name<br>
+	 * Useful if storing tokens for different user ID's etc.
+	 * @param string $suffix
+	 */
+	public function SetTokenSuffix($suffix)
+	{
+		$suffix = $this->CleanSuffix($suffix);
+		$this->_tokenSuffix = $suffix;
+		
+		$this->_authTokenName = 'auth' . $suffix .'.tkn';
+		$this->_refreshTokenName = 'refresh' . $suffix .'.tkn';
+	}
+	
+	/**
 	 * Check that storage path is writable
 	 */
 	private function CheckPathWritable()
@@ -97,6 +113,18 @@ class FSTokenStorer implements iTokenStorer
 		
 	}
 
+	/**
+	 * Clean a token suffix.<br>
+	 * Removes unwanted characters that could cause issues with filenames.<br>
+	 * Valid characters are limited to alphanumeric characters and spaces
+	 * @param string $string
+	 */
+	private function CleanSuffix($string)
+	{
+		return preg_replace("/[^a-zA-Z0-9\s]/", "", $string);
+	}
+	
+	
 	/**
 	 * Checks if path exists and attempts to create it
 	 * @return bool Boolean if path exists
