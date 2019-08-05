@@ -1,4 +1,6 @@
 <?php
+namespace eve\sso\tests;
+
 /**
 * PHPUnit 4.2.6 Unit Tests
 */
