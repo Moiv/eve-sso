@@ -24,6 +24,7 @@ $requester = new TokenRequester($keychain);
 
 $result = $requester->RequestToken($generator->GenerateTokenRequest($code)); //This returns true on success
 
+if ($result) echo ('Authorisation was successful. Reload web page');
 //Add output code here
 
 ?>
