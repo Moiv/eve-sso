@@ -41,8 +41,9 @@ class EveSSO
 		} else {
 			$this->generator = new RequestGenerator(CLIENT_ID, SECRET_KEY);
 			$this->generator->SetCallback(CALLBACK_URL);
-			$this->generator->SetESIScope(ESI_SCOPE);
 			$this->generator->SetState(UNIQUE_STATE);
+			if (defined('ESI_SCOPE')) $this->generator->SetESIScope(ESI_SCOPE);
+
 		}
 	}
 
