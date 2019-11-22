@@ -111,11 +111,13 @@ class EveSSO
 	
 	/**
 	 * Get the auth token request URL
+	 * @param string $uri [Optional] Callback URI
+	 * @param string $state [Optional] A unique string of your choice
 	 * @return string Auth token request URL
 	 */
-	public function GetRequestCode()
+	public function GetRequestCode($uri = '', $state = '')
 	{
-		return $this->generator->GenerateAuthoriseRequest();
+		return $this->generator->GenerateAuthoriseRequest(uri, state);
 	}
 
 

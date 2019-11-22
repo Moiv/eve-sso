@@ -6,9 +6,9 @@ if (!defined('EVE_SSO_PATH')) define('EVE_SSO_PATH', './');
 
 include EVE_SSO_PATH.'Configuration.php';
 $generator = new RequestGenerator(CLIENT_ID, SECRET_KEY);
-$generator->SetCallback(CALLBACK_URL);
-$generator->SetESIScope(ESI_SCOPE);
-$generator->SetState(UNIQUE_STATE);
+//$generator->SetCallback(CALLBACK_URL);
+//$generator->SetESIScope(ESI_SCOPE);
+//$generator->SetState(UNIQUE_STATE);
 
 //Using default keychain with FSTokenStorer
 $keychain = new KeyChain(new FSTokenStorer(FS_TOKEN_PATH), CLIENT_ID, SECRET_KEY);

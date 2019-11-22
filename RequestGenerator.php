@@ -35,7 +35,7 @@ class RequestGenerator
 	 * @param string $uri Callback URI
 	 * @param string $client_id You Application's Client ID
 	 * @param string $scope A URL encoded, space delimited list of ESI scopes you would like to request permissions for
-	 * @param string $state A unique string of your choic
+	 * @param string $state A unique string of your choice
 	 * @return string A string containing the request URL
 	 */
 	public function GenerateAuthoriseRequest($uri = '', $state = '')
