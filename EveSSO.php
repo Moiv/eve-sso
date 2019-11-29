@@ -117,7 +117,7 @@ class EveSSO
 	 */
 	public function GetRequestCode($uri = '', $state = '')
 	{
-		return $this->generator->GenerateAuthoriseRequest(uri, state);
+		return $this->generator->GenerateAuthoriseRequest($uri, $state);
 	}
 
 
