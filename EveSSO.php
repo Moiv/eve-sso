@@ -147,6 +147,7 @@ class EveSSO
 	
 	/**
 	 * Refresh the auth token
+	 * @return bool True on refresh success
 	 */
 	public function RefreshAuthToken()
 	{
@@ -157,8 +158,10 @@ class EveSSO
 		{
 			$requester = new TokenRequester($this->keychain);
 			
-			$requester->RequestToken($this->generator->GenerateTokenRequest($refreshtoken));
+			$success = $requester->RequestToken($this->generator->GenerateTokenRequest($refreshtoken));
 		}
+		
+		return $success;
 	}
 	
 	
