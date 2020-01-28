@@ -124,9 +124,11 @@ class EveSSO
 	/**
 	 * Output HTML Code to show the LOG IN with EVE Online button
 	 * @param string $url URL for button to direct to
-	 * @param int $size [optional] Size of buttom image
+	 * @param int $size [optional] Size of button image:<br> 1 = Large Black (Default), 2 = Large White, 3 = Small Black, 4 = Small White
+	 * @param bool $echo [optional] Set to false to suppress echoing the HTML code 
+	 * @return string containing HTML code
 	 */
-	public function HTMLLoginButton($url, $size=1)
+	public function HTMLLoginButton($url, $size=1, $echo = true)
 	{
 		switch ($size) {
 			case 2:
@@ -142,7 +144,10 @@ class EveSSO
 				$img = 'eve-sso-login-black-large.png';
 				break;
 		}
-		echo " <A HREF = '$url'><img src = 'https://web.ccpgamescdn.com/eveonlineassets/developers/$img'></a>";
+		$string = " <A HREF = '$url'><img src = 'https://web.ccpgamescdn.com/eveonlineassets/developers/$img'></a>";
+		
+		if ($echo) echo $string;
+		return $string;
 	}
 	
 	/**
