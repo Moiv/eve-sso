@@ -26,7 +26,7 @@ See below for an example of using it in an existing php project, with eve-sso in
 if (!defined('EVE_SSO_PATH')) define('EVE_SSO_PATH', './eve-sso/');
 include EVE_SSO_PATH.'Configuration.php';
 
-$eveSSO = new EveSSO();
+$eveSSO = new /eve/sso/EveSSO();
 
 $eveSSO->Init();
 ```
