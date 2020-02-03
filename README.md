@@ -15,7 +15,7 @@ define('UNIQUE_STATE', 'thecorp'); <-- Change this to any custom unique string. 
 ```
 ## Usage
 Refer to index.php for a basic usage example, note that the sample index.php is in the same directory as eve-sso.
-If you have installed eve-sso into a sub directory you must define the EVE_SSO_PATH prior to using eve-sso.
+If you have installed eve-sso into a sub directory you must define the EVE_SSO_PATH prior to using eve-sso in your existing code.
 
 See below for an example of using it in an existing php project, with eve-sso in a sub directory
 ```php
