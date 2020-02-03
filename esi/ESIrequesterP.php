@@ -77,7 +77,7 @@ class ESIrequesterP {
 	 * @param string $id ID of corporation to search for
 	 * @param \eve\sso\AuthToken $token Authorisation Token
 	 * @param string $route ESI Route to request
-	 * @return ESIresponse
+	 * @return ESIresponse containing an array
 	 */
 	function RequestCorpData($id, $token, $route)
 	{
@@ -214,7 +214,8 @@ class ESIrequesterP {
 	 * Available values : agent, alliance, character, constellation, corporation, faction, inventory_type, region, solar_system, station
 	 * @param string $string String containing the name to search for
 	 * @param string $strict [optional] Whether the search should be a strict match
-	 * @return ESIresponse containing all matched ID's or null if no ID found
+	 * @return ESIresponse containing a stdClass object.<br>
+	 * The stdClass object will have a property named the same as the $category variable supplied, which will hold all matched ID's in an array or null if no ID found
 	*/
 	function Search($category, $string, $strict = "false")
 	{

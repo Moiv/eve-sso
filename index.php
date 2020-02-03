@@ -18,9 +18,13 @@ if ($status == 'authd') echo 'Congratulations, you have been authenticated & hav
 // ESI Examples Below
 $esi = new \eve\esi\ESIrequesterP();
 
-$itemIds = $esi->Search('inventory_type', 'Compressed');        // Search for items containing the word 'Compressed'
+$response = $esi->Search('inventory_type', 'Compressed');				// Search for items containing the word 'Compressed'
+$itemIds = $response->GetResponse()->inventory_type;
 
-$corpID = $esi->Search('corporation', 'Your Corp Name', true);  // Set this to your corp name. 
+$response = $esi->Search('corporation', 'Caldari Provisions', true);	// Set this to your corp name.
+$corpID = $response->GetResponse()->corporation[0];
 
-$memberIds = $esi->RequestCorpData($corpID, $eveSSO->GetAuthTokenString(), 'Members');  // This will only work if EveSSO Authentication has been successful
+$response = $esi->RequestCorpData($corpID, $eveSSO->GetAuthTokenString(), 'Members');	// This will only work if EveSSO Authentication has been successful
+$memberIds = $response->GetResponse()->Members;
+
 ?>

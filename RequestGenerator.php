@@ -4,7 +4,7 @@ namespace eve\sso;
 /**
  * Generates Request URL's for Eve's SSO Service
  * @author Moiv
- *        
+ *
  */
 class RequestGenerator
 {
@@ -33,8 +33,6 @@ class RequestGenerator
 	 * Generate an authorisation URL to login to Eve SSO
 	 *
 	 * @param string $uri Callback URI
-	 * @param string $client_id You Application's Client ID
-	 * @param string $scope A URL encoded, space delimited list of ESI scopes you would like to request permissions for
 	 * @param string $state A unique string of your choice
 	 * @return string A string containing the request URL
 	 */
@@ -66,7 +64,7 @@ class RequestGenerator
 	 */
 	public function GenerateTokenRequest($auth_code)
 	{
-		
+
 		$ch = curl_init();
 
 		$headers = array(
@@ -77,7 +75,7 @@ class RequestGenerator
 
 		curl_setopt($ch, CURLOPT_URL, $this->SSO_token_base_path);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		
+
 		if (is_string($auth_code))
 		{
 			//echo "Generating an auth code request";
@@ -90,7 +88,7 @@ class RequestGenerator
 			// Invalid data passed in to function
 			return false;
 		}
-		
+
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
