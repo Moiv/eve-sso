@@ -3,6 +3,8 @@ namespace eve\esi;
 
 /**
  * ESI Response
+ * Note that ESIresponses generated from an ESIrequester->Search will return a stdClass object in the response field<br>
+ * ESIresponses generated from RequestCorpData calls will return an array in the response field.
  *
  * @author Moiv
  *
@@ -13,6 +15,7 @@ class ESIresponse implements iESIresponse
 	private $_error_msg;
 	private $_json;
 	private $_response;
+	private $_returnAssocArray = false;
 	private $_sso_status;
 	private $_success;
 
@@ -25,7 +28,7 @@ class ESIresponse implements iESIresponse
 	public function __construct($json)
 	{
 		$this->_json = $json;
-		$this->_response = json_decode($json);
+		$this->_response = json_decode($json, $this->_returnAssocArray);
 		$this->_success = true;
 
 		if ($this->_json == false) {
@@ -46,9 +49,19 @@ class ESIresponse implements iESIresponse
 			$this->_error_msg = $this->_response->error;
 		}
 
+		if (is_array($this->_response) && array_key_exists("error", $this->_response)) {
+			$this->_success = false;
+			$this->_error_msg = $this->_response["error"];
+		}
+
 		if (is_object($this->_response) && property_exists($this->_response, "sso_status")) {
 			// print "SSO Status Exists: ".$this->_response->sso_status;
 			$this->_sso_status = $this->_response->sso_status;
+		}
+
+		if (is_array($this->_response) && array_key_exists("sso_status", $this->_response)) {
+			// print "SSO Status Exists: ".$this->_response->sso_status;
+			$this->_sso_status = $this->_response["sso_status"];
 		}
 
 		if (strlen($this->_json) < 4) // This means an empty response from ESI Servers - Usually after a search was not found

@@ -27,11 +27,34 @@ class ESIrequesterP {
 		$this->_ch = curl_init();
 	}
 
+	function RequestAuthId($token)
+	{
+		$request = $this->_ESI_base_path . "verify/?";
+
+		$query_data = array(
+			'datasource' => $this->datasource
+		);
+
+		$request .= http_build_query($query_data);
+		// echo "$request<br>\n";
+		// echo "$token<br>\n";
+
+		$json = $this->CurlRequest($request, $token);
+
+		return new ESIresponse($json);
+
+		// $contents = json_decode($json); // Returns Returns the value encoded in json in appropriate PHP type.
+		// // Values true, false and null are returned as TRUE, FALSE and NULL respectively.
+		// // NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.
+
+		// return $contents;
+	}
+
 	/**
 	 * Request character information for a given Character ID
 	 *
 	 * @param string $id ID of character
-	 * @return \stdClass containing character information
+	 * @return ESIresponse containing a stdClass object
 	 */
 	function RequestCharacter($id)
 	{
@@ -44,16 +67,19 @@ class ESIrequesterP {
 		$request .= http_build_query($query_data);
 
 		$json = $this->CurlRequest($request);
-		$contents = json_decode($json);
 
-		return $contents;
+		return new ESIresponse($json);
+
+// 		$contents = json_decode($json);
+
+// 		return $contents;
 	}
 
 	/**
 	 * Request character portrait for a given Character ID
 	 *
 	 * @param string $id ID of character
-	 * @return \stdClass containing links to portrait images
+	 * @return ESIresponse containing a stdClass object
 	 */
 	function RequestCharacterPortrait($id)
 	{
@@ -66,9 +92,12 @@ class ESIrequesterP {
 		$request .= http_build_query($query_data);
 
 		$json = $this->CurlRequest($request);
-		$contents = json_decode($json);
 
-		return $contents;
+		return new ESIresponse($json);
+
+// 		$contents = json_decode($json);
+
+// 		return $contents;
 	}
 
 	/**
@@ -107,7 +136,7 @@ class ESIrequesterP {
 	 * Does not require authorisation
 	 *
 	 * @param string $id ID of corporation to search for
-	 * @return \stdClass containing all corporation related information
+	 * @return ESIresponse containing a stdClass object
 	 */
 	function RequestCorpInfo($id)
 	{
@@ -121,9 +150,12 @@ class ESIrequesterP {
 		// echo "$request";
 
 		$json = $this->CurlRequest($request);
-		$contents = json_decode($json);
 
-		return $contents;
+		return new ESIresponse($json);
+
+// 		$contents = json_decode($json);
+
+// 		return $contents;
 	}
 
 	/**
@@ -131,7 +163,7 @@ class ESIrequesterP {
 	 *
 	 * @param string $id ID of corporation to search for
 	 * @param \eve\sso\AuthToken $token Authorisation Token
-	 * @return ESIresponse
+	 * @return ESIresponse containing an array
 	 */
 	function RequestCorpBlueprints($id, $token)
 	{
@@ -143,7 +175,7 @@ class ESIrequesterP {
 	 *
 	 * @param string $id ID of corporation to search for
 	 * @param \eve\sso\AuthToken $token Authorisation Token
-	 * @return ESIresponse
+	 * @return ESIresponse containing an array
 	 */
 	function RequestCorpMembers($id, $token)
 	{
@@ -155,7 +187,7 @@ class ESIrequesterP {
 	 *
 	 * @param string $id ID of corporation to search for
 	 * @param \eve\sso\AuthToken $token Authorisation Token
-	 * @return mixed
+	 * @return ESIresponse containing an array
 	 */
 	function RequestCorpStructures($id, $token)
 	{
@@ -236,8 +268,8 @@ class ESIrequesterP {
 
 		$response = new ESIresponse($json);
 
-		if (property_exists($response, "EmptyResponse")) return array();
-		if ($response->WasSuccessful() == false) return array('error_msg' => $response->GetErrorMsg());
+		//if (property_exists($response, "EmptyResponse")) return array();
+		//if ($response->WasSuccessful() == false) return array('error_msg' => $response->GetErrorMsg());
 
 		//return $response->GetResponse()->$category;     // Returns an array instead of the ESIresponse object
 		return $response;

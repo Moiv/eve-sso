@@ -8,8 +8,8 @@ require_once EVE_SSO_PATH.'KeyChain.php';
 
 /**
  *
- * @author Mike
- *        
+ * @author Moiv
+ *
  */
 
 use PHPUnit_Framework_TestCase as TestCase;
@@ -19,23 +19,23 @@ use eve\sso\KeyChain;
 final class KeyChainTest extends TestCase
 {
 	protected $tokenStorer;
-	
+
 	protected function setUp()
 	{
 		$this->tokenStorer = new FSTokenStorer('/tmp');
 	}
-	
-	
+
+
 	/**
 	 * @expectedException PHPUnit_Framework_Error
 	 */
 	public function testCreatingWithoutArgumentsExpectException()
 	{
 		$keychain = new KeyChain();
-		
+
 		$this->assertEmpty($keychain, 'Expecting $keychain to be empty?');
 	}
-	
+
 	/**
 	 * @expectedException PHPUnit_Framework_Error_Warning
 	 */
@@ -43,8 +43,8 @@ final class KeyChainTest extends TestCase
 	{
 		$keychain = new KeyChain($this->tokenStorer);
 	}
-	
-	
-	
+
+
+
 }
 
