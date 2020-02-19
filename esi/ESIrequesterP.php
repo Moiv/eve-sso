@@ -171,6 +171,19 @@ class ESIrequesterP {
 	}
 
 	/**
+	 * Request a list of corporation industry jobs - Requires EveSSO Authentication
+	 *
+	 * @param string $id ID of corporation to search for
+	 * @param \eve\sso\AuthToken $token Authorisation Token
+	 * @return ESIresponse containing an array
+	 */
+	function RequestCorpIndustryJobs($id, $token)
+	{
+		return $this->RequestCorpData($id, $token, 'industry/jobs');
+	}
+	
+	
+	/**
 	 * Request a list of corporation members - Requires EveSSO Authentication
 	 *
 	 * @param string $id ID of corporation to search for
