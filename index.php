@@ -1,6 +1,8 @@
 <?php
 namespace eve\sso;
 
+use eve\esi\ESIresponse;
+
 //iF EVE-SSO-PATH is not defined then set to current directory
 if (!defined('EVE_SSO_PATH')) define('EVE_SSO_PATH', './');
 
@@ -21,10 +23,16 @@ $esi = new \eve\esi\ESIrequesterP();
 $response = $esi->Search('inventory_type', 'Compressed');				// Search for items containing the word 'Compressed'
 $itemIds = $response->GetResponse()->inventory_type;
 
-$response = $esi->Search('corporation', 'Caldari Provisions', true);	// Set this to your corp name.
+$response = $esi->Search('corporation', 'Caldari Provisions', true);	// Search for a corporation called 'Caldari Provisions'
 $corpID = $response->GetResponse()->corporation[0];
 
-$response = $esi->RequestCorpData($corpID, $eveSSO->GetAuthTokenString(), 'Members');	// This will only work if EveSSO Authentication has been successful
-$memberIds = $response->GetResponse()->Members;
+$response = $esi->RequestCorpInfo($corpID);								// Request corp info on the corpID from the above query
+
+// Display results
+echo "<pre>\n";
+print_r($itemIds);
+print_r("\nCorp ID: ".$corpID."\n\n");
+print_r($response->GetResponse());
+echo "</pre>";
 
 ?>

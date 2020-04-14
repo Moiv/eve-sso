@@ -1,6 +1,8 @@
 <?php
 namespace eve\esi;
 
+use eve\sso\Token;
+
 /**
  * ESI Request Class with persistent curl connection.
  * @link https://esi.evetech.net/ui/
@@ -27,7 +29,13 @@ class ESIrequesterP {
 		$this->_ch = curl_init();
 	}
 
-	function RequestAuthId($token)
+	/**
+	 * Get the Character ID of the auth'd character in an auth token
+	 * @param Token $authToken
+	 * @return \eve\esi\ESIresponse
+	 */
+	
+	function RequestAuthId($authToken)
 	{
 		$request = $this->_ESI_base_path . "verify/?";
 
@@ -39,15 +47,9 @@ class ESIrequesterP {
 		// echo "$request<br>\n";
 		// echo "$token<br>\n";
 
-		$json = $this->CurlRequest($request, $token);
+		$json = $this->CurlRequest($request, $authToken);
 
 		return new ESIresponse($json);
-
-		// $contents = json_decode($json); // Returns Returns the value encoded in json in appropriate PHP type.
-		// // Values true, false and null are returned as TRUE, FALSE and NULL respectively.
-		// // NULL is returned if the json cannot be decoded or if the encoded data is deeper than the recursion limit.
-
-		// return $contents;
 	}
 
 	/**
@@ -133,7 +135,7 @@ class ESIrequesterP {
 
 	/**
 	 * Request public information about a corp.
-	 * Does not require authorisation
+	 * Does not require EveSSO authorisation
 	 *
 	 * @param string $id ID of corporation to search for
 	 * @return ESIresponse containing a stdClass object
